@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Windows.Shell, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Windows.Shell.3.0.1.0\lib\net40\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -56,12 +59,8 @@
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\StateToBoolConverter.cs" />
     <Compile Include="RelayCommand.cs" />
-    <Compile Include="WindowControl\CommandsBehaviours\ControlDoubleClickBehavior.cs" />
     <Compile Include="WindowControl\CommandsBehaviours\ShowSystemMenuBehavior.cs" />
     <Compile Include="WindowControl\CommandsBehaviours\SystemMenuManager.cs" />
-    <Compile Include="WindowControl\CommandsBehaviours\WindowCloseCommand.cs" />
-    <Compile Include="WindowControl\CommandsBehaviours\WindowMaximizeCommand.cs" />
-    <Compile Include="WindowControl\CommandsBehaviours\WindowMinimizeCommand.cs" />
     <Compile Include="WindowControl\CommandsBehaviours\WindowResizeBehavior.cs" />
     <Compile Include="WindowControl\CustomWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -81,6 +80,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

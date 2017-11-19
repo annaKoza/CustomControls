@@ -12,9 +12,9 @@
     <SolidColorBrush x:Key="WindowForeColorPressed" Color="#343434" />
     <SolidColorBrush x:Key="WindowThemeColor" Color="#e3a21a" />
     <SolidColorBrush x:Key="DeactivatedWindow" Color="#343434" />
-    <SolidColorBrush x:Key="InactiveBorderBrush" Color="green" />
-    <SolidColorBrush x:Key="InactiveShadowColor" Color="green" />
-    <SolidColorBrush x:Key="BorderBrush" Color="red" />
-    <SolidColorBrush x:Key="ShadowColor" Color="red" />
+    <SolidColorBrush x:Key="InactiveBorderBrush" Color="#343434" />
+    <SolidColorBrush x:Key="InactiveShadowColor" Color="#99343434" />
+    <SolidColorBrush x:Key="BorderBrush" Color="#e3a21a" />
+    <SolidColorBrush x:Key="ShadowColor" Color="#99E3A21A" />
 
 </ResourceDictionary>

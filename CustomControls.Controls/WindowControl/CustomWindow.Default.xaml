@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:CustomControls.Controls.Converters"
     xmlns:local="clr-namespace:CustomControls.Controls"
+    xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
     xmlns:sw="clr-namespace:CustomControls.Controls.WindowControl.CommandsBehaviours">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Resources;component/Default/Colors.Default.xaml" />
@@ -10,30 +11,17 @@
     <conv:StateToBoolConverter x:Key="StateToBoolConverter" />
     <conv:BoolToVisibilityConverter x:Key="BoolToVisibility" />
 
-    <!--  Commands  -->
-    <sw:WindowMinimizeCommand x:Key="MinimizeCommand" />
-    <sw:WindowMaximizeCommand x:Key="MaximizeCommand" />
-    <sw:WindowCloseCommand x:Key="CloseCommand" />
-
     <!--  Path From ToggleButton Style  -->
-    <Style x:Key="PathStyle" TargetType="Path">
-        <Setter Property="Fill" Value="{Binding ElementName=PART_MaximizeButton, Path=Foreground}" />
+    <Style x:Key="GeometryDrawingStyle" TargetType="Path">
+        <Setter Property="Fill" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}, Path=Foreground}" />
         <Setter Property="Stretch" Value="Uniform" />
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding ElementName=PART_MaximizeButton, Path=IsMouseOver}" Value="True">
-                <Setter Property="Fill" Value="{Binding ElementName=PART_MaximizeButton, Path=Foreground}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=PART_MaximizeButton, Path=IsPressed}" Value="True">
-                <Setter Property="Fill" Value="{Binding ElementName=PART_MaximizeButton, Path=Foreground}" />
-            </DataTrigger>
-        </Style.Triggers>
     </Style>
 
     <!--  Taskbar Button Template  -->
     <Style x:Key="ButtonStyle" TargetType="{x:Type ButtonBase}">
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="30" />
-        <Setter Property="Background" Value="{StaticResource WindowBackColor}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{StaticResource WindowForeColor}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -65,7 +53,9 @@
         TargetType="{x:Type Button}">
         <Setter Property="Content">
             <Setter.Value>
-                <TextBlock>AA</TextBlock>
+                <Viewbox Width="12" Height="10">
+                    <Path Data="F1M8,42L12,42 16,46 20,42 24,42 18,48 24,54 20,54 16,50 12,54 8,54 14,48z" Style="{StaticResource GeometryDrawingStyle}" />
+                </Viewbox>
             </Setter.Value>
         </Setter>
     </Style>
@@ -76,50 +66,65 @@
         TargetType="{x:Type Button}">
         <Setter Property="Content">
             <Setter.Value>
-                <TextBlock>BB</TextBlock>
+                <Viewbox Width="14" Height="12">
+                    <Rectangle Width="14" Height="12">
+                        <Rectangle.Fill>
+                            <DrawingBrush>
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <DrawingGroup.Children>
+                                            <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                                            <GeometryDrawing Brush="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}}, Path=Foreground}" Geometry="F1M14,11L2,11 2,14 14,14z" />
+                                        </DrawingGroup.Children>
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </Viewbox>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style
-        x:Key="WindowToggleButton"
+        x:Key="MaximizeButton"
         BasedOn="{StaticResource ButtonStyle}"
-        TargetType="{x:Type ToggleButton}">
-        <Style.Resources>
-            <DataTemplate x:Key="b1">
-                <Grid Height="10">
-                    <Path Data="F1 M21.368,16z M0,0z M21.368,0L5.194,0 5.194,3.324 0,3.324 0,16 16.175,16 16.175,12.675 21.368,12.675 21.368,0 21.368,0z M15.305,15.361L0.87,15.361 0.87,5.598 15.306,5.598 15.306,15.361 15.305,15.361z M20.5,12.035L16.175,12.035 16.175,3.324 6.063,3.324 6.063,2.273 20.5,2.273 20.5,12.035 20.5,12.035z" Style="{StaticResource PathStyle}" />
-                </Grid>
-            </DataTemplate>
-            <DataTemplate x:Key="b2">
-                <Grid Height="10">
-                    <Path Data="F1 M21.078,16z M0,0z M0,0L0,16 21.078,16 21.078,0 0,0z M20.213,15.094L0.863,15.094 0.863,2.564 20.213,2.564 20.213,15.094 20.213,15.094 20.213,15.094z" Style="{StaticResource PathStyle}" />
-                </Grid>
-            </DataTemplate>
-        </Style.Resources>
-        <Style.Triggers>
-            <Trigger Property="IsChecked" Value="True">
-                <Setter Property="ContentTemplate" Value="{StaticResource b1}" />
-            </Trigger>
-            <Trigger Property="IsChecked" Value="False">
-                <Setter Property="ContentTemplate" Value="{StaticResource b2}" />
-            </Trigger>
-        </Style.Triggers>
+        TargetType="{x:Type Button}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Viewbox Width="12" Height="10">
+                    <Path Data="F1M28,25L4,25 4,10 28,10z M2,27L30,27 30,4 2,4z" Style="{StaticResource GeometryDrawingStyle}"/>
+                </Viewbox>
+            </Setter.Value>
+        </Setter>
     </Style>
 
+    <Style
+        x:Key="RestoreButton"
+        BasedOn="{StaticResource ButtonStyle}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Content">
+            <Setter.Value>
+                <Viewbox Width="12" Height="10">
+                    <Path Data="F1M25,50L23,50 23,44 11,44 11,42 25,42z M21,56L7,56 7,48 21,48z M27,38L9,38 9,44 5,44 5,58 23,58 23,52 27,52z" Style="{StaticResource GeometryDrawingStyle}" />                              
+                </Viewbox>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--  MainGrid Style  -->
     <Style x:Key="MainGridStyle" TargetType="Grid">
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Background}" />
+        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" />
     </Style>
 
     <!--  Main Border Style  -->
     <Style x:Key="MainBorderStyle" TargetType="Border">
-        <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=BorderThickness}" />
+        <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderThickness}" />
         <Setter Property="Opacity" Value="1" />
-        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=BorderBrush}" />
+        <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=BorderBrush}" />
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=IsActive}" Value="False">
-                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=InactiveBorderBrush}" />
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsActive}" Value="False">
+                <Setter Property="BorderBrush" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveBorderBrush}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -132,18 +137,18 @@
                     BlurRadius="10"
                     Opacity="1"
                     ShadowDepth="0"
-                    Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=WindowShadowColor}" />
+                    Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WindowShadowColor}" />
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=IsActive}" Value="False">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsActive}" Value="False">
                 <Setter Property="Effect">
                     <Setter.Value>
                         <DropShadowEffect
                             BlurRadius="10"
                             Opacity="0.6"
                             ShadowDepth="0"
-                            Color="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=InactiveWindowShadowColor}" />
+                            Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveWindowShadowColor}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
@@ -158,7 +163,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
-    <DataTemplate x:Key="icon">
+    <DataTemplate x:Key="Icon">
         <Image Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=Icon}" Style="{StaticResource WindowIcon}" />
     </DataTemplate>
 
@@ -166,25 +171,21 @@
 
     <!--  the main style window  -->
     <Style TargetType="{x:Type local:CustomWindow}">
-
-        <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="IsBarVisible" Value="True" />
-        <Setter Property="MinimizeCommand" Value="{StaticResource MinimizeCommand}" />
-        <Setter Property="MaximizeCommand" Value="{StaticResource MaximizeCommand}" />
-        <Setter Property="CloseCommand" Value="{StaticResource CloseCommand}" />
         <Setter Property="BarColor" Value="{StaticResource WindowBackColor}" />
         <Setter Property="ShowInTaskbar" Value="True" />
         <Setter Property="WindowShadowColor" Value="{Binding Source={StaticResource ShadowColor}, Path=Color}" />
         <Setter Property="InactiveWindowShadowColor" Value="{Binding Source={StaticResource InactiveShadowColor}, Path=Color}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ShowActivated" Value="True" />
-        <Setter Property="WindowState" Value="Maximized" />
-        <Setter Property="MaximizeButtonStyle" Value="{StaticResource WindowToggleButton}" />
-        <Setter Property="IconFieldContent" Value="{StaticResource icon}" />
+        <Setter Property="WindowState" Value="Normal" />
+        <Setter Property="MaximizeButtonStyle" Value="{StaticResource MaximizeButton}" />
+        <Setter Property="IconFieldContent" Value="{StaticResource Icon}" />
         <Setter Property="MinimizeButtonStyle" Value="{StaticResource MinimizeButton}" />
         <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButton}" />
-        <Setter Property="ResizeMode" Value="CanMinimize" />
+        <Setter Property="RestoreButtonStyle" Value="{StaticResource RestoreButton}"/>
+        <Setter Property="ResizeMode" Value="CanResize"/>
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
         <Setter Property="AllowsTransparency" Value="True" />
@@ -193,7 +194,7 @@
         <Setter Property="InactiveBorderBrush" Value="{StaticResource InactiveBorderBrush}" />
         <Setter Property="Background" Value="{StaticResource WindowBackColor}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
-        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:CustomWindow}">
@@ -238,21 +239,25 @@
                                             <StackPanel Grid.Column="2" Orientation="Horizontal">
                                                 <Button
                                                     Name="PART_MinimizeButton"
-                                                    Command="{TemplateBinding MinimizeCommand}"
-                                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                                    Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                     Style="{TemplateBinding MinimizeButtonStyle}" />
-
-                                                <ToggleButton
+                                                <Grid>
+                                                    <Button
+                                                    Name="PART_RestoreButton"
+                                                    Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                    Style="{TemplateBinding RestoreButtonStyle}" />
+                                                    <Button
                                                     Name="PART_MaximizeButton"
-                                                    Command="{TemplateBinding MaximizeCommand}"
-                                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
-                                                    IsThreeState="False"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                    Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
                                                     Style="{TemplateBinding MaximizeButtonStyle}" />
-
+                                                </Grid>
                                                 <Button
                                                     Name="PART_CloseButton"
-                                                    Command="{TemplateBinding CloseCommand}"
-                                                    CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                                    Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
+                                                    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                     Style="{TemplateBinding CloseButtonStyle}" />
                                             </StackPanel>
                                         </Grid>
@@ -277,7 +282,7 @@
                                         Height="6"
                                         Margin="14,0"
                                         VerticalAlignment="Top"
-                                        sw:WindowResizeBehavior.TopResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.TopResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeNS"
                                         Opacity="0" />
                                     <Thumb
@@ -286,7 +291,7 @@
                                         Height="6"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Top"
-                                        sw:WindowResizeBehavior.TopLeftResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.TopLeftResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeNWSE"
                                         Opacity="0" />
                                     <Thumb
@@ -294,7 +299,7 @@
                                         Height="6"
                                         Margin="14,0"
                                         VerticalAlignment="Bottom"
-                                        sw:WindowResizeBehavior.BottomResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.BottomResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeNS"
                                         Opacity="0" />
                                     <Thumb
@@ -303,7 +308,7 @@
                                         Height="6"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Top"
-                                        sw:WindowResizeBehavior.TopRightResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.TopRightResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeNESW"
                                         Opacity="0" />
                                     <Thumb
@@ -311,7 +316,7 @@
                                         Width="6"
                                         Margin="0,14"
                                         HorizontalAlignment="Right"
-                                        sw:WindowResizeBehavior.RightResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.RightResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeWE"
                                         Opacity="0" />
                                     <Thumb
@@ -320,7 +325,7 @@
                                         Height="6"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Bottom"
-                                        sw:WindowResizeBehavior.BottomRightResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.BottomRightResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeNWSE"
                                         Opacity="0" />
                                     <Thumb
@@ -328,7 +333,7 @@
                                         Width="6"
                                         Margin="0,14"
                                         HorizontalAlignment="Left"
-                                        sw:WindowResizeBehavior.LeftResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.LeftResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeWE"
                                         Opacity="0" />
                                     <Thumb
@@ -337,7 +342,7 @@
                                         Height="6"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Bottom"
-                                        sw:WindowResizeBehavior.BottomLeftResize="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                                        sw:WindowResizeBehavior.BottomLeftResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                         Cursor="SizeNESW"
                                         Opacity="0" />
                                 </Grid>

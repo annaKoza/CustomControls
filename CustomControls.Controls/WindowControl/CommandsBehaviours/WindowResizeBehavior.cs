@@ -42,113 +42,94 @@ namespace CustomControls.Controls.WindowControl.CommandsBehaviours
         {
             var thumb = sender as Thumb;
 
-            if (thumb.GetValue(BottomResize) is Window window)
-            {
-                var verticalChange = window.SafeHeightChange(e.VerticalChange);
-                window.Height += verticalChange;
-            }
+            if (!(thumb?.GetValue(BottomResize) is Window window)) return;
+            var verticalChange = window.SafeHeightChange(e.VerticalChange);
+            window.Height += verticalChange;
         }
 
         private static void DragBottomLeft(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
 
-            if (thumb.GetValue(BottomLeftResize) is Window window)
-            {
-                var verticalChange = window.SafeHeightChange(e.VerticalChange);
-                var horizontalChange = window.SafeWidthChange(e.HorizontalChange, false);
+            if (!(thumb?.GetValue(BottomLeftResize) is Window window)) return;
+            var verticalChange = window.SafeHeightChange(e.VerticalChange);
+            var horizontalChange = window.SafeWidthChange(e.HorizontalChange, false);
 
-                window.Width -= horizontalChange;
-                window.Left += horizontalChange;
-                window.Height += verticalChange;
-            }
+            window.Width -= horizontalChange;
+            window.Left += horizontalChange;
+            window.Height += verticalChange;
         }
 
         private static void DragBottomRight(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
 
-            if (thumb.GetValue(BottomRightResize) is Window window)
-            {
-                var verticalChange = window.SafeHeightChange(e.VerticalChange);
-                var horizontalChange = window.SafeWidthChange(e.HorizontalChange);
+            if (!(thumb?.GetValue(BottomRightResize) is Window window)) return;
+            var verticalChange = window.SafeHeightChange(e.VerticalChange);
+            var horizontalChange = window.SafeWidthChange(e.HorizontalChange);
 
-                window.Width += horizontalChange;
-                window.Height += verticalChange;
-            }
+            window.Width += horizontalChange;
+            window.Height += verticalChange;
         }
 
         private static void DragLeft(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
 
-            if (thumb.GetValue(LeftResize) is Window window)
-            {
-                var horizontalChange = window.SafeWidthChange(e.HorizontalChange, false);
-                window.Width -= horizontalChange;
-                window.Left += horizontalChange;
-
-            }
+            if (!(thumb?.GetValue(LeftResize) is Window window)) return;
+            var horizontalChange = window.SafeWidthChange(e.HorizontalChange, false);
+            window.Width -= horizontalChange;
+            window.Left += horizontalChange;
         }
 
         private static void DragRight(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
 
-            if (thumb.GetValue(RightResize) is Window window)
-            {
-                var horizontalChange = window.SafeWidthChange(e.HorizontalChange);
-                window.Width += horizontalChange;
-            }
+            if (!(thumb?.GetValue(RightResize) is Window window)) return;
+            var horizontalChange = window.SafeWidthChange(e.HorizontalChange);
+            window.Width += horizontalChange;
         }
 
         private static void DragTop(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
 
-            if (thumb.GetValue(TopResize) is Window window)
-            {
-                var verticalChange = window.SafeHeightChange(e.VerticalChange, false);
-                window.Height -= verticalChange;
-                window.Top += verticalChange;
-            }
+            if (!(thumb?.GetValue(TopResize) is Window window)) return;
+            var verticalChange = window.SafeHeightChange(e.VerticalChange, false);
+            window.Height -= verticalChange;
+            window.Top += verticalChange;
         }
 
         private static void DragTopLeft(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
+            
+            if (!(thumb?.GetValue(TopLeftResize) is Window window)) return;
+            var verticalChange = window.SafeHeightChange(e.VerticalChange, false);
+            var horizontalChange = window.SafeWidthChange(e.HorizontalChange, false);
 
-
-            if (thumb.GetValue(TopLeftResize) is Window window)
-            {
-                var verticalChange = window.SafeHeightChange(e.VerticalChange, false);
-                var horizontalChange = window.SafeWidthChange(e.HorizontalChange, false);
-
-                window.Width -= horizontalChange;
-                window.Left += horizontalChange;
-                window.Height -= verticalChange;
-                window.Top += verticalChange;
-            }
+            window.Width -= horizontalChange;
+            window.Left += horizontalChange;
+            window.Height -= verticalChange;
+            window.Top += verticalChange;
         }
 
         private static void DragTopRight(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
 
-            if (thumb.GetValue(TopRightResize) is Window window)
-            {
-                var verticalChange = window.SafeHeightChange(e.VerticalChange, false);
-                var horizontalChange = window.SafeWidthChange(e.HorizontalChange);
+            if (!(thumb?.GetValue(TopRightResize) is Window window)) return;
+            var verticalChange = window.SafeHeightChange(e.VerticalChange, false);
+            var horizontalChange = window.SafeWidthChange(e.HorizontalChange);
 
-                window.Width += horizontalChange;
-                window.Height -= verticalChange;
-                window.Top += verticalChange;
-            }
+            window.Width += horizontalChange;
+            window.Height -= verticalChange;
+            window.Top += verticalChange;
         }
 
         private static void OnBottomLeftResizeChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
             if (sender is Thumb thumb)
             {
                 thumb.DragDelta += DragBottomLeft;
@@ -157,7 +138,6 @@ namespace CustomControls.Controls.WindowControl.CommandsBehaviours
 
         private static void OnBottomResizeChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
             if (sender is Thumb thumb)
             {
                 thumb.DragDelta += DragBottom;
@@ -172,7 +152,6 @@ namespace CustomControls.Controls.WindowControl.CommandsBehaviours
 
         private static void OnLeftResizeChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
             if (sender is Thumb thumb)
             {
                 thumb.DragDelta += DragLeft;
@@ -181,7 +160,6 @@ namespace CustomControls.Controls.WindowControl.CommandsBehaviours
 
         private static void OnRightResizeChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
             if (sender is Thumb thumb)
             {
                 thumb.DragDelta += DragRight;
@@ -196,7 +174,6 @@ namespace CustomControls.Controls.WindowControl.CommandsBehaviours
 
         private static void OnTopResizeChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-
             if (sender is Thumb thumb)
             {
                 thumb.DragDelta += DragTop;
@@ -212,45 +189,13 @@ namespace CustomControls.Controls.WindowControl.CommandsBehaviours
         private static double SafeHeightChange(this Window window, double change, bool positive = true)
         {
             var result = positive ? window.Height + change : window.Height - change;
-
-            if (result <= window.MinHeight)
-            {
-                return 0;
-            }
-            else if (result >= window.MaxHeight)
-            {
-                return 0;
-            }
-            else if (result < 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return change;
-            }
+            return result <= window.MinHeight ? 0 : (result >= window.MaxHeight ? 0 : (result < 0 ? 0 : change));
         }
 
         private static double SafeWidthChange(this Window window, double change, bool positive = true)
         {
             var result = positive ? window.Width + change : window.Width - change;
-
-            if (result <= window.MinWidth)
-            {
-                return 0;
-            }
-            else if (result >= window.MaxWidth)
-            {
-                return 0;
-            }
-            else if (result < 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return change;
-            }
+            return result <= window.MinWidth ? 0 : (result >= window.MaxWidth ? 0 : (result < 0 ? 0 : change));
         }
 
         public static Window GetBottomLeftResize(DependencyObject obj)
