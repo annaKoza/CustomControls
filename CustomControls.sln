@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls.Examples", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls.Tests", "CustomControls.Tests\CustomControls.Tests.csproj", "{C3E9D28A-4779-4A22-B839-3BF3A460944D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls.Resources", "CustomControls.Resources\CustomControls.Resources.csproj", "{697CCD0E-A03C-4D40-9FE1-F9E9B491BDD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C3E9D28A-4779-4A22-B839-3BF3A460944D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3E9D28A-4779-4A22-B839-3BF3A460944D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3E9D28A-4779-4A22-B839-3BF3A460944D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697CCD0E-A03C-4D40-9FE1-F9E9B491BDD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697CCD0E-A03C-4D40-9FE1-F9E9B491BDD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697CCD0E-A03C-4D40-9FE1-F9E9B491BDD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697CCD0E-A03C-4D40-9FE1-F9E9B491BDD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

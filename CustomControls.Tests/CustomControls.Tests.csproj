@@ -54,6 +54,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CustomControls.Controls\CustomControls.Controls.csproj">
+      <Project>{2baf27d7-4a99-42cb-809c-94873ffddb54}</Project>
+      <Name>CustomControls.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomControls.Resources\CustomControls.Resources.csproj">
+      <Project>{697ccd0e-a03c-4d40-9fe1-f9e9b491bdd7}</Project>
+      <Name>CustomControls.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
