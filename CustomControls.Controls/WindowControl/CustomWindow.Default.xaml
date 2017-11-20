@@ -3,8 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:CustomControls.Controls.Converters"
     xmlns:local="clr-namespace:CustomControls.Controls"
-    xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
-    xmlns:sw="clr-namespace:CustomControls.Controls.WindowControl.CommandsBehaviours">
+    xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Resources;component/Default/Colors.Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -93,7 +92,7 @@
         <Setter Property="Content">
             <Setter.Value>
                 <Viewbox Width="12" Height="10">
-                    <Path Data="F1M28,25L4,25 4,10 28,10z M2,27L30,27 30,4 2,4z" Style="{StaticResource GeometryDrawingStyle}"/>
+                    <Path Data="F1M28,25L4,25 4,10 28,10z M2,27L30,27 30,4 2,4z" Style="{StaticResource GeometryDrawingStyle}" />
                 </Viewbox>
             </Setter.Value>
         </Setter>
@@ -106,12 +105,12 @@
         <Setter Property="Content">
             <Setter.Value>
                 <Viewbox Width="12" Height="10">
-                    <Path Data="F1M25,50L23,50 23,44 11,44 11,42 25,42z M21,56L7,56 7,48 21,48z M27,38L9,38 9,44 5,44 5,58 23,58 23,52 27,52z" Style="{StaticResource GeometryDrawingStyle}" />                              
+                    <Path Data="F1M25,50L23,50 23,44 11,44 11,42 25,42z M21,56L7,56 7,48 21,48z M27,38L9,38 9,44 5,44 5,58 23,58 23,52 27,52z" Style="{StaticResource GeometryDrawingStyle}" />
                 </Viewbox>
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--  MainGrid Style  -->
     <Style x:Key="MainGridStyle" TargetType="Grid">
         <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}" />
@@ -159,7 +158,7 @@
     <Style x:Key="WindowIcon" TargetType="{x:Type Image}">
         <Setter Property="Height" Value="20" />
         <Setter Property="Width" Value="20" />
-        <Setter Property="Margin" Value="10,0,7,0" />
+        <Setter Property="Margin" Value="10,5,10,5" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
@@ -179,17 +178,28 @@
         <Setter Property="InactiveWindowShadowColor" Value="{Binding Source={StaticResource InactiveShadowColor}, Path=Color}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ShowActivated" Value="True" />
+        <Setter Property="Foreground" Value="{StaticResource WindowForeColor}" />
         <Setter Property="WindowState" Value="Normal" />
         <Setter Property="MaximizeButtonStyle" Value="{StaticResource MaximizeButton}" />
         <Setter Property="IconFieldContent" Value="{StaticResource Icon}" />
         <Setter Property="MinimizeButtonStyle" Value="{StaticResource MinimizeButton}" />
         <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButton}" />
-        <Setter Property="RestoreButtonStyle" Value="{StaticResource RestoreButton}"/>
-        <Setter Property="ResizeMode" Value="CanResize"/>
+        <Setter Property="RestoreButtonStyle" Value="{StaticResource RestoreButton}" />
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
         <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="BarHeight" Value="30.0" />
         <Setter Property="MinWidth" Value="100" />
+        <Setter Property="BarLabelContent">
+            <Setter.Value>
+                <ContentPresenter>
+                    <ContentPresenter.Content>
+                        <TextBlock>dupa</TextBlock>
+                    </ContentPresenter.Content>
+                </ContentPresenter>
+            </Setter.Value>
+        </Setter>
         <Setter Property="MinHeight" Value="300" />
         <Setter Property="InactiveBorderBrush" Value="{StaticResource InactiveBorderBrush}" />
         <Setter Property="Background" Value="{StaticResource WindowBackColor}" />
@@ -204,11 +214,12 @@
                                 <Grid>
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="30" />
+                                            <RowDefinition Height="Auto" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
                                         <Grid
                                             Grid.Row="0"
+                                            Height="{TemplateBinding BarHeight}"
                                             Margin="0"
                                             Background="{TemplateBinding BarColor}"
                                             Visibility="{TemplateBinding IsBarVisible,
@@ -233,8 +244,12 @@
                                                 VerticalContentAlignment="Center"
                                                 Content="{TemplateBinding BarLabelContent}"
                                                 DockPanel.Dock="Left"
-                                                FontSize="12"
-                                                Foreground="{StaticResource WindowForeColor}" />
+                                                FontFamily="{TemplateBinding FontFamily}"
+                                                FontSize="{TemplateBinding FontSize}"
+                                                FontStretch="{TemplateBinding FontStretch}"
+                                                FontStyle="{TemplateBinding FontStyle}"
+                                                FontWeight="{TemplateBinding FontWeight}"
+                                                Foreground="{TemplateBinding Foreground}" />
 
                                             <StackPanel Grid.Column="2" Orientation="Horizontal">
                                                 <Button
@@ -244,15 +259,15 @@
                                                     Style="{TemplateBinding MinimizeButtonStyle}" />
                                                 <Grid>
                                                     <Button
-                                                    Name="PART_RestoreButton"
-                                                    Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
-                                                    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                    Style="{TemplateBinding RestoreButtonStyle}" />
+                                                        Name="PART_RestoreButton"
+                                                        Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                        Style="{TemplateBinding RestoreButtonStyle}" />
                                                     <Button
-                                                    Name="PART_MaximizeButton"
-                                                    CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                                    Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
-                                                    Style="{TemplateBinding MaximizeButtonStyle}" />
+                                                        Name="PART_MaximizeButton"
+                                                        Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+                                                        Style="{TemplateBinding MaximizeButtonStyle}" />
                                                 </Grid>
                                                 <Button
                                                     Name="PART_CloseButton"
@@ -272,79 +287,72 @@
                                                     HorizontalAlignment="Right"
                                                     VerticalAlignment="Bottom"
                                                     IsTabStop="false"
-                                                    Visibility="Collapsed" />
+                                                    Visibility="Visible" />
                                             </Grid>
                                         </Border>
                                     </Grid>
-
-                                    <Thumb
-                                        x:Name="ThumbTop"
-                                        Height="6"
-                                        Margin="14,0"
-                                        VerticalAlignment="Top"
-                                        sw:WindowResizeBehavior.TopResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeNS"
-                                        Opacity="0" />
-                                    <Thumb
-                                        x:Name="ThumbTopLeft"
-                                        Width="6"
-                                        Height="6"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        sw:WindowResizeBehavior.TopLeftResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeNWSE"
-                                        Opacity="0" />
-                                    <Thumb
-                                        x:Name="ThumbBottom"
-                                        Height="6"
-                                        Margin="14,0"
-                                        VerticalAlignment="Bottom"
-                                        sw:WindowResizeBehavior.BottomResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeNS"
-                                        Opacity="0" />
-                                    <Thumb
-                                        x:Name="ThumbTopRight"
-                                        Width="6"
-                                        Height="6"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Top"
-                                        sw:WindowResizeBehavior.TopRightResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeNESW"
-                                        Opacity="0" />
-                                    <Thumb
-                                        x:Name="ThumbRight"
-                                        Width="6"
-                                        Margin="0,14"
-                                        HorizontalAlignment="Right"
-                                        sw:WindowResizeBehavior.RightResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeWE"
-                                        Opacity="0" />
-                                    <Thumb
-                                        x:Name="ThumbBottomRight"
-                                        Width="6"
-                                        Height="6"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Bottom"
-                                        sw:WindowResizeBehavior.BottomRightResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeNWSE"
-                                        Opacity="0" />
-                                    <Thumb
-                                        x:Name="ThumbLeft"
-                                        Width="6"
-                                        Margin="0,14"
-                                        HorizontalAlignment="Left"
-                                        sw:WindowResizeBehavior.LeftResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeWE"
-                                        Opacity="0" />
-                                    <Thumb
-                                        x:Name="ThumbBottomLeft"
-                                        Width="6"
-                                        Height="6"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Bottom"
-                                        sw:WindowResizeBehavior.BottomLeftResize="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                                        Cursor="SizeNESW"
-                                        Opacity="0" />
+                                    <Grid x:Name="PART_ResizeGrid">
+                                        <Thumb
+                                            x:Name="ThumbTop"
+                                            Height="6"
+                                            Margin="14,0"
+                                            VerticalAlignment="Top"
+                                            Cursor="SizeNS"
+                                            Opacity="0" />
+                                        <Thumb
+                                            x:Name="ThumbTopLeft"
+                                            Width="6"
+                                            Height="6"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Top"
+                                            Cursor="SizeNWSE"
+                                            Opacity="0" />
+                                        <Thumb
+                                            x:Name="ThumbBottom"
+                                            Height="6"
+                                            Margin="14,0"
+                                            VerticalAlignment="Bottom"
+                                            Cursor="SizeNS"
+                                            Opacity="0" />
+                                        <Thumb
+                                            x:Name="ThumbTopRight"
+                                            Width="6"
+                                            Height="6"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Top"
+                                            Cursor="SizeNESW"
+                                            Opacity="0" />
+                                        <Thumb
+                                            x:Name="ThumbRight"
+                                            Width="6"
+                                            Margin="0,14"
+                                            HorizontalAlignment="Right"
+                                            Cursor="SizeWE"
+                                            Opacity="0" />
+                                        <Thumb
+                                            x:Name="ThumbBottomRight"
+                                            Width="6"
+                                            Height="6"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Cursor="SizeNWSE"
+                                            Opacity="0" />
+                                        <Thumb
+                                            x:Name="ThumbLeft"
+                                            Width="6"
+                                            Margin="0,14"
+                                            HorizontalAlignment="Left"
+                                            Cursor="SizeWE"
+                                            Opacity="0" />
+                                        <Thumb
+                                            x:Name="ThumbBottomLeft"
+                                            Width="6"
+                                            Height="6"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Bottom"
+                                            Cursor="SizeNESW"
+                                            Opacity="0" />
+                                    </Grid>
                                 </Grid>
                             </Border>
                         </Grid>
