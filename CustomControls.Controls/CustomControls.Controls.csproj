@@ -58,8 +58,6 @@
   <ItemGroup>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\StateToBoolConverter.cs" />
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="WindowControl\CommandsBehaviours\ShowSystemMenuBehavior.cs" />
     <Compile Include="WindowControl\CommandsBehaviours\SystemMenuManager.cs" />
     <Compile Include="WindowControl\CustomWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
