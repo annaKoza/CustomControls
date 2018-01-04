@@ -223,13 +223,13 @@ namespace CustomControls.Controls
 
         private void CustomWindow_StateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
+            if (WindowState == WindowState.Maximized && ResizeMode != ResizeMode.NoResize)
             {
                 _maximizeButton.Visibility = Visibility.Hidden;
                 _restoreButton.Visibility = Visibility.Visible;
                 SetWindowMargin(true);
             }
-            else if (WindowState == WindowState.Normal)
+            else if (WindowState == WindowState.Normal && ResizeMode != ResizeMode.NoResize)
             {
                 _maximizeButton.Visibility = Visibility.Visible;
                 _restoreButton.Visibility = Visibility.Collapsed;
@@ -324,7 +324,7 @@ namespace CustomControls.Controls
                     break;
             }
         }
-
+        
         private void OnCustomWindowSourceInitialized(object sender, EventArgs e)
         {
             var mWindowHandle = new WindowInteropHelper(this).Handle;

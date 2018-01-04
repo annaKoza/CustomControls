@@ -252,11 +252,22 @@
                                                 Foreground="{TemplateBinding Foreground}" />
 
                                             <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                                <Grid>
                                                 <Button
                                                     Name="PART_MinimizeButton"
                                                     Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}"
                                                     CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                     Style="{TemplateBinding MinimizeButtonStyle}" />
+                                                    <Grid.Style>
+                                                        <Style TargetType="Grid">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="NoResize">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Grid.Style>
+                                                </Grid>
                                                 <Grid>
                                                     <Button
                                                         Name="PART_RestoreButton"
@@ -268,12 +279,27 @@
                                                         Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}"
                                                         CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                         Style="{TemplateBinding MaximizeButtonStyle}" />
+                                                    <Grid.Style>
+                                                        <Style TargetType="Grid">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="NoResize">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="CanMinimize">
+                                                                    <Setter Property="IsEnabled" Value="False" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Grid.Style>
                                                 </Grid>
+                                                <Grid>
                                                 <Button
                                                     Name="PART_CloseButton"
                                                     Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}"
                                                     CommandParameter="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                                                     Style="{TemplateBinding CloseButtonStyle}" />
+                                                </Grid>
+                                                
                                             </StackPanel>
                                         </Grid>
 
@@ -286,8 +312,18 @@
                                                     x:Name="PART_WindowResizeGrip"
                                                     HorizontalAlignment="Right"
                                                     VerticalAlignment="Bottom"
-                                                    IsTabStop="false"
-                                                    Visibility="Visible" />
+                                                    IsTabStop="false">
+                                                    <ResizeGrip.Style>
+                                                        <Style TargetType="ResizeGrip">
+                                                            <Setter Property="Visibility" Value="Hidden"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="CanResizeWithGrip">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ResizeGrip.Style>
+                                                </ResizeGrip>
                                             </Grid>
                                         </Border>
                                     </Grid>
@@ -352,6 +388,18 @@
                                             VerticalAlignment="Bottom"
                                             Cursor="SizeNESW"
                                             Opacity="0" />
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="NoResize">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ResizeMode, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="CanMinimize">
+                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
                                     </Grid>
                                 </Grid>
                             </Border>
