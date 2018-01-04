@@ -185,7 +185,7 @@
         <Setter Property="MinimizeButtonStyle" Value="{StaticResource MinimizeButton}" />
         <Setter Property="CloseButtonStyle" Value="{StaticResource CloseButton}" />
         <Setter Property="RestoreButtonStyle" Value="{StaticResource RestoreButton}" />
-        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter Property="ResizeMode" Value="CanResize" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="TextOptions.TextRenderingMode" Value="ClearType" />
         <Setter Property="AllowsTransparency" Value="True" />
@@ -195,7 +195,7 @@
             <Setter.Value>
                 <ContentPresenter>
                     <ContentPresenter.Content>
-                        <TextBlock>dupa</TextBlock>
+                        <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"/>
                     </ContentPresenter.Content>
                 </ContentPresenter>
             </Setter.Value>
