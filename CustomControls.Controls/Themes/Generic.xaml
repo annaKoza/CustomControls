@@ -4,7 +4,7 @@
     xmlns:local="clr-namespace:CustomControls.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Controls;component/WindowControl/CustomWindow.Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Controls;component/WindowControl/CustomWindow.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

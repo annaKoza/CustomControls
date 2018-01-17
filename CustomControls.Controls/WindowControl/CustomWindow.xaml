@@ -4,9 +4,9 @@
     xmlns:conv="clr-namespace:CustomControls.Controls.Converters"
     xmlns:local="clr-namespace:CustomControls.Controls"
     xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell">
-    <ResourceDictionary.MergedDictionaries>
+    <!--<ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Resources;component/Default/Colors.Default.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary.MergedDictionaries>-->
     <conv:StateToBoolConverter x:Key="StateToBoolConverter" />
     <conv:BoolToVisibilityConverter x:Key="BoolToVisibility" />
 
@@ -21,7 +21,7 @@
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Width" Value="30" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource WindowForeColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForeColor}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
@@ -30,15 +30,15 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="{StaticResource WindowBackColor}" />
+                            <Setter Property="Background" Value="{DynamicResource WindowBackColor}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource WindowButtonOverColor}" />
-                            <Setter Property="Foreground" Value="{StaticResource WindowForeHighlightColor}" />
+                            <Setter Property="Background" Value="{DynamicResource WindowButtonOverColor}" />
+                            <Setter Property="Foreground" Value="{DynamicResource WindowForeHighlightColor}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="{StaticResource WindowButtonPressedColor}" />
-                            <Setter Property="Foreground" Value="{StaticResource WindowForeColorPressed}" />
+                            <Setter Property="Background" Value="{DynamicResource WindowButtonPressedColor}" />
+                            <Setter Property="Foreground" Value="{DynamicResource WindowForeColorPressed}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -136,18 +136,18 @@
                     BlurRadius="10"
                     Opacity="1"
                     ShadowDepth="0"
-                    Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=WindowShadowColor}" />
+                    Color="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:CustomWindow}}, Path=WindowShadowColor}" />
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsActive}" Value="False">
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:CustomWindow}}, Path=IsActive}" Value="False">
                 <Setter Property="Effect">
                     <Setter.Value>
                         <DropShadowEffect
                             BlurRadius="10"
                             Opacity="0.6"
                             ShadowDepth="0"
-                            Color="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=InactiveWindowShadowColor}" />
+                            Color="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:CustomWindow}}, Path=InactiveWindowShadowColor}" />
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
@@ -172,13 +172,13 @@
     <Style TargetType="{x:Type local:CustomWindow}">
         <Setter Property="WindowStyle" Value="None" />
         <Setter Property="IsBarVisible" Value="True" />
-        <Setter Property="BarColor" Value="{StaticResource WindowBackColor}" />
+        <Setter Property="BarColor" Value="{DynamicResource WindowBackColor}" />
         <Setter Property="ShowInTaskbar" Value="True" />
-        <Setter Property="WindowShadowColor" Value="{Binding Source={StaticResource ShadowColor}, Path=Color}" />
-        <Setter Property="InactiveWindowShadowColor" Value="{Binding Source={StaticResource InactiveShadowColor}, Path=Color}" />
+        <Setter Property="WindowShadowColor" Value="{DynamicResource ShadowColor}" />
+        <Setter Property="InactiveWindowShadowColor" Value="{DynamicResource InactiveShadowColor}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ShowActivated" Value="True" />
-        <Setter Property="Foreground" Value="{StaticResource WindowForeColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource WindowForeColor}" />
         <Setter Property="WindowState" Value="Normal" />
         <Setter Property="MaximizeButtonStyle" Value="{StaticResource MaximizeButton}" />
         <Setter Property="IconFieldContent" Value="{StaticResource Icon}" />
@@ -201,9 +201,9 @@
             </Setter.Value>
         </Setter>
         <Setter Property="MinHeight" Value="300" />
-        <Setter Property="InactiveBorderBrush" Value="{StaticResource InactiveBorderBrush}" />
-        <Setter Property="Background" Value="{StaticResource WindowBackColor}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}" />
+        <Setter Property="InactiveBorderBrush" Value="{DynamicResource InactiveBorderBrush}" />
+        <Setter Property="Background" Value="{DynamicResource WindowBackColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
