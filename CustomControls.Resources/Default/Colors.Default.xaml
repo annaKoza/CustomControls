@@ -1,0 +1,20 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CustomControls.Resources">
+
+    <!--  the brushes used in the template (use these to customize the window look along with the window style (see the bottom of this file)  -->
+    <SolidColorBrush x:Key="WindowBackColor" Color="#1d1d1d" />
+    <SolidColorBrush x:Key="WindowForeColor" Color="#B1B1B1" />
+    <SolidColorBrush x:Key="WindowForeHighlightColor" Color="#D5D5D5" />
+    <SolidColorBrush x:Key="WindowButtonOverColor" Color="#343434" />
+    <SolidColorBrush x:Key="WindowButtonPressedColor" Color="#e3a21a" />
+    <SolidColorBrush x:Key="WindowForeColorPressed" Color="#343434" />
+    <SolidColorBrush x:Key="WindowThemeColor" Color="#e3a21a" />
+    <SolidColorBrush x:Key="DeactivatedWindow" Color="#343434" />
+    <SolidColorBrush x:Key="InactiveBorderBrush" Color="#343434" />
+    <SolidColorBrush x:Key="InactiveShadowColor" Color="#99343434" />
+    <SolidColorBrush x:Key="BorderBrush" Color="#e3a21a" />
+    <SolidColorBrush x:Key="ShadowColor" Color="#99E3A21A" />
+
+</ResourceDictionary>
