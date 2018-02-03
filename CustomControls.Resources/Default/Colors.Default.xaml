@@ -2,7 +2,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:CustomControls.Resources">
-
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Default/Menu.Default.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
     <!--  the brushes used in the template (use these to customize the window look along with the window style  -->
     <SolidColorBrush x:Key="WindowBackColor" Color="#1d1d1d" />
     <SolidColorBrush x:Key="WindowForeColor" Color="#B1B1B1" />

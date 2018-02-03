@@ -109,5 +109,8 @@
   <ItemGroup>
     <Resource Include="Account.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="jpeg_grey.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

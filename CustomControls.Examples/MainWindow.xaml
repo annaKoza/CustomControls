@@ -10,6 +10,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="Item1">
+                <MenuItem Header="Item4c">
+                    <MenuItem Header="Item4ca"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Item2">
+                <MenuItem Header="Item4c" >
+                    <MenuItem.Icon>
+                        <Image Source="Account.ico" Width="16"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Item4ca"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Item3"/>
+            <MenuItem Header="Item4">
+                <MenuItem Header="Item4a"/>
+                <Separator/>
+                <MenuItem Header="Item4b"/>
+                <MenuItem Header="Item4c">
+                    <MenuItem Header="Item4ca"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
     </Grid>
 </cc:CustomWindow>
